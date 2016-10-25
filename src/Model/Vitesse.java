@@ -2,6 +2,7 @@ package Model;
 
 import View.Planete;
 import View.Vaisseau;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
@@ -19,6 +20,8 @@ public class Vitesse {
             temps = temps + 0.01;
         }));
         p = new Planete(9.8);
+        tl.setCycleCount(Animation.INDEFINITE);
+        tl.play();
     }
 
     public Vaisseau getZodiac() {
@@ -35,7 +38,6 @@ public class Vitesse {
     }
 
     public double calculPosY() {
-        getZodiac().setY(getZodiac().getY() + (calculVitesseY()*temps + 0.5* getP().getGRAVITE() * Math.pow(temps,2)));
-        return getZodiac().getY();
+        return (calculVitesseY()*temps + 0.5* getP().getGRAVITE() * Math.pow(temps,2));
     }
 }
