@@ -11,12 +11,14 @@ public class Vitesse {
     private Vaisseau zodiac;
     private Planete p;
     double temps = 0;
-    Timeline tl = new Timeline(new KeyFrame(Duration.millis(10), a -> {
-        temps = temps + 0.01;
-    }));
+    Timeline tl;
 
     public Vitesse(Vaisseau v){
         this.zodiac = v;
+        tl = new Timeline(new KeyFrame(Duration.millis(10), a -> {
+            temps = temps + 0.01;
+        }));
+        p = new Planete(9.8);
     }
 
     public Vaisseau getZodiac() {
@@ -27,7 +29,13 @@ public class Vitesse {
         return p;
     }
 
-    public void calculVitesseY(){
+    public double calculVitesseY(){
         getZodiac().setVitesseY(getZodiac().getVitesseY() + getP().getGRAVITE() * temps);
+        return getZodiac().getVitesseY();
+    }
+
+    public double calculPosY() {
+        getZodiac().setY(getZodiac().getY() + (calculVitesseY()*temps + 0.5* getP().getGRAVITE() * Math.pow(temps,2)));
+        return getZodiac().getY();
     }
 }

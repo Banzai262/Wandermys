@@ -7,8 +7,8 @@ public class Vaisseau {
 
     private double vitesseX;
     private double vitesseY;
-    private int X;
-    private int Y;
+    private double X;
+    private double Y;
     private Rectangle vaisseau;
 
     public Vaisseau(){
@@ -39,19 +39,19 @@ public class Vaisseau {
         this.vitesseY = vitesseY;
     }
 
-    public int getX() {
+    public double getX() {
         return X;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         X = x;
     }
 
-    public int getY() {
+    public double getY() {
         return Y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         Y = y;
     }
 }

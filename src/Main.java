@@ -1,3 +1,4 @@
+import Model.Vitesse;
 import View.Planete;
 import View.Vaisseau;
 import javafx.application.Application;
@@ -14,6 +15,8 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 1366, 768));
         Vaisseau v = new Vaisseau();
         Planete p = new Planete(9.8);
+        Vitesse vit = new Vitesse(v);
+        vit.calculPosY();
 
         root.getChildren().addAll(v.getVaisseau(), p.getSol());
         primaryStage.show();
