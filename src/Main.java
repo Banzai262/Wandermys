@@ -1,3 +1,4 @@
+import Model.Collider;
 import Model.Vitesse;
 import View.Planete;
 import View.Vaisseau;
@@ -20,13 +21,20 @@ public class Main extends Application {
         Vaisseau v = new Vaisseau();
         Planete p = new Planete(9.8);
         Vitesse vit = new Vitesse(v);
+        Collider col = new Collider();
 
         Timeline deplacement = new Timeline(
-                new KeyFrame(Duration.millis(10), a -> {
+                new KeyFrame(Duration.millis(10), a -> {  //le y du vaisseau ne se change jamais, il est toukours le meme
                     v.getVaisseau().setTranslateY(vit.calculPosY());
                 }));
+                new KeyFrame(Duration.millis(10), b -> {
+                    col.checkCollision(v, p.getSol(), deplacement);
+            deplacement.stop();
+        });
         deplacement.setCycleCount(Animation.INDEFINITE);
         deplacement.play();
+
+
 
         root.getChildren().addAll(v.getVaisseau(), p.getSol());
         primaryStage.show();
