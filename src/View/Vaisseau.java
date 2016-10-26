@@ -14,7 +14,9 @@ public class Vaisseau {
     public Vaisseau(){
         vaisseau = new Rectangle(50,50, Color.BLACK);
         vaisseau.setX(650);
+        this.setX(vaisseau.getX());
         vaisseau.setY(50);
+        this.setY(vaisseau.getY());
         setVitesseX(0);
         setVitesseY(0);
     }

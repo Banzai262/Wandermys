@@ -37,7 +37,9 @@ public class Vitesse {
         return getZodiac().getVitesseY();
     }
 
-    public double calculPosY() {
-        return (calculVitesseY()*temps + 0.5* getP().getGRAVITE() * Math.pow(temps,2));
+    public double calculPosY(Vaisseau v) {
+        double depY = (calculVitesseY()*temps + 0.5* getP().getGRAVITE() * Math.pow(temps,2));
+        v.setY(v.getY() + depY);
+        return depY;
     }
 }
