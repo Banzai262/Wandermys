@@ -7,7 +7,7 @@ public class Planete {
 
     private Line sol;
     private Bounds s;
-    private final double GRAVITE = 9.8;
+    private final double GRAVITE = 1;
 
     public Planete(double gravite){
         sol = new Line(0, 700, 1366, 700);

@@ -25,6 +25,8 @@ public class Main extends Application {
 
         Timeline deplacement = new Timeline(
                 new KeyFrame(Duration.millis(15), a -> {
+                    vit.up(v);
+
                     v.getVaisseau().setTranslateY(vit.calculPosY(v));
                 }));
         deplacement.setCycleCount(Animation.INDEFINITE);
