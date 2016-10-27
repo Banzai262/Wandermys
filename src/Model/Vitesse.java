@@ -12,16 +12,16 @@ public class Vitesse {
     private Vaisseau zodiac;
     private Planete p;
     double temps = 0;
-    Timeline tl;
+    Timeline time;
 
     public Vitesse(Vaisseau v){
         this.zodiac = v;
-        tl = new Timeline(new KeyFrame(Duration.millis(10), a -> {
+        time = new Timeline(new KeyFrame(Duration.millis(10), a -> {
             temps = temps + 0.01;
         }));
         p = new Planete(9.8);
-        tl.setCycleCount(Animation.INDEFINITE);
-        tl.play();
+        time.setCycleCount(Animation.INDEFINITE);
+        time.play();
     }
 
     public Vaisseau getZodiac() {
@@ -40,6 +40,7 @@ public class Vitesse {
     public double calculPosY(Vaisseau v) {
         double depY = (calculVitesseY()*temps + 0.5* getP().getGRAVITE() * Math.pow(temps,2));
         v.setY(v.getY() + depY);
+        v.setVai(v.getVaisseau().localToScene(v.getVaisseau().getBoundsInLocal()));
         return depY;
     }
 }

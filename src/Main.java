@@ -14,7 +14,7 @@ import javafx.util.Duration;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Group root = new Group();
         primaryStage.setTitle("Wandermys");
         primaryStage.setScene(new Scene(root, 1366, 768));
@@ -24,20 +24,20 @@ public class Main extends Application {
         Collider col = new Collider();
 
         Timeline deplacement = new Timeline(
-                new KeyFrame(Duration.millis(10), a -> {  //le y du vaisseau ne se change jamais, il est toukours le meme
+                new KeyFrame(Duration.millis(15), a -> {
                     v.getVaisseau().setTranslateY(vit.calculPosY(v));
                 }));
         deplacement.setCycleCount(Animation.INDEFINITE);
-        deplacement.play();
+
 
         Timeline stop = new Timeline(
-                new KeyFrame(Duration.millis(10), b -> {
+                new KeyFrame(Duration.millis(0.1), b -> {
                     col.checkCollision(v, p, deplacement);
                 })
         );
         stop.setCycleCount(Animation.INDEFINITE);
         stop.play();
-
+        deplacement.play();
 
 
         root.getChildren().addAll(v.getVaisseau(), p.getSol());

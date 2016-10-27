@@ -1,5 +1,6 @@
 package View;
 
+import javafx.geometry.Bounds;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -10,6 +11,7 @@ public class Vaisseau {
     private double X;
     private double Y;
     private Rectangle vaisseau;
+    private Bounds vai;
 
     public Vaisseau(){
         vaisseau = new Rectangle(50,50, Color.BLACK);
@@ -19,6 +21,7 @@ public class Vaisseau {
         this.setY(vaisseau.getY());
         setVitesseX(0);
         setVitesseY(0);
+        vai = vaisseau.localToScene(vaisseau.getBoundsInLocal());
     }
 
     public Rectangle getVaisseau() {
@@ -55,5 +58,13 @@ public class Vaisseau {
 
     public void setY(double y) {
         Y = y;
+    }
+
+    public Bounds getVai() {
+        return vai;
+    }
+
+    public void setVai(Bounds vai) {
+        this.vai = vai;
     }
 }
