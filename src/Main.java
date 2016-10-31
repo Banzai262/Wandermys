@@ -19,14 +19,25 @@ public class Main extends Application {
         primaryStage.setTitle("Wandermys");
         primaryStage.setScene(new Scene(root, 1366, 768));
         Vaisseau v = new Vaisseau();
-        Planete p = new Planete(9.8);
+        Planete p = new Planete();
         Vitesse vit = new Vitesse(v);
         Collider col = new Collider();
 
+
+        v.getVaisseau().setOnKeyPressed(event -> {
+            vit.setPressed(true);
+        });
+
+        v.getVaisseau().setOnKeyReleased(event -> {
+            vit.setPressed(false);
+        });
+
+        v.getVaisseau().setOnMouseClicked(event ->
+                vit.setPressed(true));
+
+
         Timeline deplacement = new Timeline(
                 new KeyFrame(Duration.millis(15), a -> {
-                    vit.up(v);
-
                     v.getVaisseau().setTranslateY(vit.calculPosY(v));
                 }));
         deplacement.setCycleCount(Animation.INDEFINITE);
@@ -40,7 +51,6 @@ public class Main extends Application {
         stop.setCycleCount(Animation.INDEFINITE);
         stop.play();
         deplacement.play();
-
 
         root.getChildren().addAll(v.getVaisseau(), p.getSol());
         primaryStage.show();

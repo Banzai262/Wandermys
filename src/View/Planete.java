@@ -7,11 +7,10 @@ public class Planete {
 
     private Line sol;
     private Bounds s;
-    private final double GRAVITE = 1;
+    private final double GRAVITE = 0.1;
 
-    public Planete(double gravite){
+    public Planete(){
         sol = new Line(0, 700, 1366, 700);
-        gravite = this.GRAVITE;
         s = sol.localToScene(sol.getBoundsInLocal());
     }
 
