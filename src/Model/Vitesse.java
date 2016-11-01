@@ -14,7 +14,7 @@ public class Vitesse {
 
     private Vaisseau zodiac;
     private Planete p;
-    double temps = 0;
+    private double temps = 0;
     Timeline time;
     private double accel;
     private boolean pressed = false;
@@ -28,6 +28,10 @@ public class Vitesse {
         time.setCycleCount(Animation.INDEFINITE);
         time.play();
         setAccel(getP().getGRAVITE());
+    }
+
+    public void setTemps(double temps) {
+        this.temps = temps;
     }
 
     public boolean isPressed() {
@@ -54,7 +58,7 @@ public class Vitesse {
         return p;
     }
 
-    public double calculVitesseY() {
+    public double calculVitesseY() {       //peut-être enlever le if et mettre tout ça dans la variable accel
         if (!this.isPressed()) {
             getZodiac().setVitesseY(getZodiac().getVitesseY() + getP().getGRAVITE() * temps);
             return getZodiac().getVitesseY();

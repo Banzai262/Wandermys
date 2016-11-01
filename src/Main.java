@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -25,11 +26,15 @@ public class Main extends Application {
 
 
         v.getVaisseau().setOnKeyPressed(event -> {
-            vit.setPressed(true);
+            if (event.getCode() == KeyCode.UP) {
+                vit.setPressed(true);
+            }
         });
 
         v.getVaisseau().setOnKeyReleased(event -> {
-            vit.setPressed(false);
+            if (event.getCode() == KeyCode.UP) {
+                vit.setPressed(false);
+            }
         });
 
         v.getVaisseau().setOnMouseClicked(event ->
@@ -54,6 +59,7 @@ public class Main extends Application {
 
         root.getChildren().addAll(v.getVaisseau(), p.getSol());
         primaryStage.show();
+        v.getVaisseau().requestFocus();
     }
 
 
