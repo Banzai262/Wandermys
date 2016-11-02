@@ -5,9 +5,6 @@ import View.Vaisseau;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.EventHandler;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 
 public class Vitesse {
@@ -18,6 +15,9 @@ public class Vitesse {
     Timeline time;
     private double accel;
     private boolean pressed = false;
+    private boolean rotationDroite = false;
+    private boolean rotationGauche = false;
+
 
     public Vitesse(Vaisseau v) {
         this.zodiac = v;
@@ -28,6 +28,22 @@ public class Vitesse {
         time.setCycleCount(Animation.INDEFINITE);
         time.play();
         setAccel(getP().getGRAVITE());
+    }
+
+    public boolean isRotationDroite() {
+        return rotationDroite;
+    }
+
+    public void setRotationDroite(boolean rotationDroite) {
+        this.rotationDroite = rotationDroite;
+    }
+
+    public boolean isRotationGauche() {
+        return rotationGauche;
+    }
+
+    public void setRotationGauche(boolean rotationGauche) {
+        this.rotationGauche = rotationGauche;
     }
 
     public void setTemps(double temps) {
@@ -73,37 +89,20 @@ public class Vitesse {
             double depY = (calculVitesseY() * temps + 0.5 * getP().getGRAVITE() * Math.pow(temps, 2));
             v.setY(v.getY() + depY);
             v.setVai(v.getVaisseau().localToScene(v.getVaisseau().getBoundsInLocal()));
+            if (rotationDroite)
+                v.getVaisseau().setRotate(v.getVaisseau().getRotate() + 10);
+            if (rotationGauche)
+                v.getVaisseau().setRotate(v.getVaisseau().getRotate() - 10);
             return depY;
         } else if (this.isPressed()) {
             double depY = (calculVitesseY() * temps + 0.5 * (getP().getGRAVITE() - 0.5) * Math.pow(temps, 2));
             v.setY(v.getY() + depY);
             v.setVai(v.getVaisseau().localToScene(v.getVaisseau().getBoundsInLocal()));
+            if (rotationDroite)
+                v.getVaisseau().setRotate(v.getVaisseau().getRotate() + 10);
+            if (rotationGauche)
+                v.getVaisseau().setRotate(v.getVaisseau().getRotate() - 10);
             return depY;
         } else return 0;
-
-    }
-
-    public void up(Vaisseau v) {
-        v.getVaisseau().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent ke) {
-                if (ke.getCode() == KeyCode.K.UP) {
-                    setPressed(true);
-                }
-                ke.consume();
-            }
-        });
-    }
-
-    public void down(Vaisseau v) {
-        v.getVaisseau().setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent ke) {
-                if (ke.getCode() == KeyCode.UP) {
-                    setPressed(false);
-                }
-                ke.consume();
-            }
-        });
     }
 }

@@ -18,27 +18,73 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Group root = new Group();
         primaryStage.setTitle("Wandermys");
-        primaryStage.setScene(new Scene(root, 1366, 768));
+        Scene scene = new Scene(root, 1366, 768);
+        primaryStage.setScene(scene);
         Vaisseau v = new Vaisseau();
         Planete p = new Planete();
         Vitesse vit = new Vitesse(v);
         Collider col = new Collider();
 
 
-        v.getVaisseau().setOnKeyPressed(event -> {
+        scene.setOnKeyPressed(event -> {
+            switch (event.getCode()){
+                case UP: vit.setPressed(true);
+                    break;
+                case LEFT: vit.setRotationGauche(true);
+                    break;
+                case RIGHT: vit.setRotationDroite(true);
+                    break;
+            }
+        });
+
+        scene.setOnKeyReleased(event -> {
+            switch (event.getCode()){
+                case UP: vit.setPressed(false);
+                    break;
+                case LEFT: vit.setRotationGauche(false);
+                    break;
+                case RIGHT: vit.setRotationDroite(false);
+                    break;
+            }
+        });
+
+
+     /*  scene.setOnKeyPressed(event -> {          //la vitesse ne se reset pas quand le vaisseau change de direction
             if (event.getCode() == KeyCode.UP) {
                 vit.setPressed(true);
             }
         });
 
-        v.getVaisseau().setOnKeyReleased(event -> {
+        scene.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.UP) {
                 vit.setPressed(false);
             }
         });
 
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.LEFT){
+               vit.setRotationGauche(true);
+            }
+        });
+
+        scene.setOnKeyReleased(event -> {
+            if (event.getCode() == KeyCode.LEFT)
+                vit.setRotationGauche(false);
+        });
+
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.RIGHT){
+               vit.setRotationDroite(true);
+            }
+        });
+
+        scene.setOnKeyReleased(event -> {
+            if (event.getCode() == KeyCode.RIGHT)
+                vit.setRotationGauche(false);
+        });
+
         v.getVaisseau().setOnMouseClicked(event ->
-                vit.setPressed(true));
+                vit.setPressed(true));*/
 
 
         Timeline deplacement = new Timeline(
@@ -59,7 +105,6 @@ public class Main extends Application {
 
         root.getChildren().addAll(v.getVaisseau(), p.getSol());
         primaryStage.show();
-        v.getVaisseau().requestFocus();
     }
 
 
