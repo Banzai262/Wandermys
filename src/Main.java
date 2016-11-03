@@ -33,13 +33,16 @@ public class Main extends Application {
         tt.play();*/
 
         scene.setOnKeyPressed(event -> {
-            switch (event.getCode()){
-                case UP: vit.setPressed(true);
+            switch (event.getCode()) {
+                case UP:
+                    vit.setPressed(true);
                     vit.setTemps2(0);
                     break;
-                case LEFT: vit.setRotationGauche(true);
+                case LEFT:
+                    vit.setRotationGauche(true);
                     break;
-                case RIGHT: vit.setRotationDroite(true);
+                case RIGHT:
+                    vit.setRotationDroite(true);
                     break;
             }
         });
@@ -48,6 +51,7 @@ public class Main extends Application {
             switch (event.getCode()) {
                 case UP:
                     vit.setPressed(false);
+                    vit.setTemps2(0);
                     break;
                 case LEFT:
                     vit.setRotationGauche(false);

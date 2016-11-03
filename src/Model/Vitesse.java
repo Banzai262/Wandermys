@@ -80,10 +80,11 @@ public class Vitesse {
         if (!this.isPressed()) {
             getZodiac().setVitesseY(getZodiac().getVitesseY() + getP().getGRAVITE() * temps2);
             return getZodiac().getVitesseY();
-        } else if (this.isPressed()) {
+        }
+        if (this.isPressed()) {
             getZodiac().setVitesseY(getZodiac().getVitesseY() + (getP().getGRAVITE() - 0.3) * temps2);
             return getZodiac().getVitesseY();
-        } else return 0;
+        } return 0;
     }
 
     public double calculPosY(Vaisseau v) {
