@@ -5,6 +5,7 @@ import View.Vaisseau;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -25,12 +26,16 @@ public class Main extends Application {
         Vitesse vit = new Vitesse(v);
         Collider col = new Collider();
 
+        /*TranslateTransition tt = new TranslateTransition(Duration.millis(15),v.getVaisseau());
+        tt.setOnFinished(a -> {
+            v.getVaisseau().setTranslateY(vit.calculPosY(v));
+        });
+        tt.play();*/
 
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()){
                 case UP: vit.setPressed(true);
-                    v.getVaisseau().setY(v.getY());
-                    vit.setTemps(0);
+                    vit.setTemps2(0);
                     break;
                 case LEFT: vit.setRotationGauche(true);
                     break;
@@ -40,13 +45,15 @@ public class Main extends Application {
         });
 
         scene.setOnKeyReleased(event -> {
-            switch (event.getCode()){
-                case UP: vit.setPressed(false);
-                    vit.getTime().playFromStart();
+            switch (event.getCode()) {
+                case UP:
+                    vit.setPressed(false);
                     break;
-                case LEFT: vit.setRotationGauche(false);
+                case LEFT:
+                    vit.setRotationGauche(false);
                     break;
-                case RIGHT: vit.setRotationDroite(false);
+                case RIGHT:
+                    vit.setRotationDroite(false);
                     break;
             }
         });

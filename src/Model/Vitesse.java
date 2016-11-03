@@ -12,6 +12,7 @@ public class Vitesse {
     private Vaisseau zodiac;
     private Planete p;
     private double temps = 0;
+    private double temps2 = 0;
     Timeline time;
     private double accel;
     private boolean pressed = false;
@@ -23,6 +24,7 @@ public class Vitesse {
         this.zodiac = v;
         time = new Timeline(new KeyFrame(Duration.millis(10), a -> {
             temps += 0.01;
+            temps2 += 0.01;
         }));
         p = new Planete();
         time.setCycleCount(Animation.INDEFINITE);
@@ -76,10 +78,10 @@ public class Vitesse {
 
     public double calculVitesseY() {       //peut-être enlever le if et mettre tout ça dans la variable accel
         if (!this.isPressed()) {
-            getZodiac().setVitesseY(getZodiac().getVitesseY() + getP().getGRAVITE() * temps);
+            getZodiac().setVitesseY(getZodiac().getVitesseY() + getP().getGRAVITE() * temps2);
             return getZodiac().getVitesseY();
         } else if (this.isPressed()) {
-            getZodiac().setVitesseY(getZodiac().getVitesseY() + (getP().getGRAVITE() - 0.15) * temps);
+            getZodiac().setVitesseY(getZodiac().getVitesseY() + (getP().getGRAVITE() - 0.3) * temps2);
             return getZodiac().getVitesseY();
         } else return 0;
     }
@@ -95,7 +97,7 @@ public class Vitesse {
                 v.getVaisseau().setRotate(v.getVaisseau().getRotate() - 1);
             return depY;
         } else if (this.isPressed()) {
-            double depY = (calculVitesseY() * temps + 0.5 * (getP().getGRAVITE() - 0.5) * Math.pow(temps, 2));
+            double depY = (calculVitesseY() * temps + 0.5 * (getP().getGRAVITE()) * Math.pow(temps, 2));
             v.setY(v.getY() + depY);
             v.setVai(v.getVaisseau().localToScene(v.getVaisseau().getBoundsInLocal()));
             if (isRotationDroite())
@@ -114,5 +116,11 @@ public class Vitesse {
         return temps;
     }
 
+    public double getTemps2() {
+        return temps2;
+    }
 
+    public void setTemps2(double temps2) {
+        this.temps2 = temps2;
+    }
 }
