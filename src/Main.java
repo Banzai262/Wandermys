@@ -29,6 +29,8 @@ public class Main extends Application {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()){
                 case UP: vit.setPressed(true);
+                    v.getVaisseau().setY(v.getY());
+                    vit.setTemps(0);
                     break;
                 case LEFT: vit.setRotationGauche(true);
                     break;
@@ -40,6 +42,7 @@ public class Main extends Application {
         scene.setOnKeyReleased(event -> {
             switch (event.getCode()){
                 case UP: vit.setPressed(false);
+                    vit.getTime().playFromStart();
                     break;
                 case LEFT: vit.setRotationGauche(false);
                     break;

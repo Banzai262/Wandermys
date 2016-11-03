@@ -89,20 +89,30 @@ public class Vitesse {
             double depY = (calculVitesseY() * temps + 0.5 * getP().getGRAVITE() * Math.pow(temps, 2));
             v.setY(v.getY() + depY);
             v.setVai(v.getVaisseau().localToScene(v.getVaisseau().getBoundsInLocal()));
-            if (rotationDroite)
-                v.getVaisseau().setRotate(v.getVaisseau().getRotate() + 10);
-            if (rotationGauche)
-                v.getVaisseau().setRotate(v.getVaisseau().getRotate() - 10);
+            if (isRotationDroite())
+                v.getVaisseau().setRotate(v.getVaisseau().getRotate() + 1);
+            if (isRotationGauche())
+                v.getVaisseau().setRotate(v.getVaisseau().getRotate() - 1);
             return depY;
         } else if (this.isPressed()) {
             double depY = (calculVitesseY() * temps + 0.5 * (getP().getGRAVITE() - 0.5) * Math.pow(temps, 2));
             v.setY(v.getY() + depY);
             v.setVai(v.getVaisseau().localToScene(v.getVaisseau().getBoundsInLocal()));
-            if (rotationDroite)
-                v.getVaisseau().setRotate(v.getVaisseau().getRotate() + 10);
-            if (rotationGauche)
-                v.getVaisseau().setRotate(v.getVaisseau().getRotate() - 10);
+            if (isRotationDroite())
+                v.getVaisseau().setRotate(v.getVaisseau().getRotate() + 1);
+            if (isRotationGauche())
+                v.getVaisseau().setRotate(v.getVaisseau().getRotate() - 1);
             return depY;
         } else return 0;
     }
+
+    public Timeline getTime() {
+        return time;
+    }
+
+    public double getTemps() {
+        return temps;
+    }
+
+
 }
