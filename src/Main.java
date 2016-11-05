@@ -9,9 +9,13 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.util.Optional;
 
 public class Main extends Application {
 
@@ -35,8 +39,9 @@ public class Main extends Application {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case UP:
-                    vit.setPressed(true);
                     vit.setTemps2(0);
+                    vit.setPressed(true);
+
                     break;
                 case LEFT:
                     vit.setRotationGauche(true);
@@ -63,7 +68,7 @@ public class Main extends Application {
         });
 
 
-     /*  scene.setOnKeyPressed(event -> {          //la vitesse ne se reset pas quand le vaisseau change de direction
+     /*  scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
                 vit.setPressed(true);
             }
@@ -108,9 +113,34 @@ public class Main extends Application {
         deplacement.setCycleCount(Animation.INDEFINITE);
 
 
+        Alert fin = new Alert(Alert.AlertType.INFORMATION);
+
         Timeline stop = new Timeline(
                 new KeyFrame(Duration.millis(0.1), b -> {
-                    col.checkCollision(v, p, deplacement);
+                    switch (col.checkCollision(v, p, deplacement)) {
+                        case 0:
+                            fin.setTitle("CRASH");
+                            fin.setHeaderText(null);
+                            fin.setContentText("Vous vous êtes crashé!!!");
+                            try {
+                                Optional<ButtonType> result = fin.showAndWait();
+                                if (result.get() == ButtonType.OK)
+                                    System.exit(0);
+                            } catch (Exception e) {
+                            }
+                            break;
+                        case 1:
+                            fin.setTitle("SUCCESS");
+                            fin.setHeaderText(null);
+                            fin.setContentText("Vous avez atterri en toute sécurité!!!");
+                            try {
+                                Optional<ButtonType> result = fin.showAndWait();
+                                if (result.get() == ButtonType.OK)
+                                    System.exit(0);
+                            } catch (Exception e) {
+                            }
+                            break;
+                    }
                 })
         );
         stop.setCycleCount(Animation.INDEFINITE);
