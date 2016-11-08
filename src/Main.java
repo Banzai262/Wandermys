@@ -39,7 +39,8 @@ public class Main extends Application {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case UP:
-                    vit.setTemps2(0);
+                    if (!vit.isPressed())
+                        vit.setTemps2(0);
                     vit.setPressed(true);
 
                     break;
@@ -55,8 +56,9 @@ public class Main extends Application {
         scene.setOnKeyReleased(event -> {
             switch (event.getCode()) {
                 case UP:
+                    if (vit.isPressed())
+                        vit.setTemps2(0);
                     vit.setPressed(false);
-                    vit.setTemps2(0);
                     break;
                 case LEFT:
                     vit.setRotationGauche(false);
